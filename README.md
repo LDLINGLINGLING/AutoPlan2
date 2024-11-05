@@ -32,11 +32,13 @@
 ```plantext
 Question:
 确认我方直升机的最大作战范围内是否包含敌方的指挥中心位置。
+
 Plan:
 1.使用knowledge_graph获取直升机的续航里程A。
 2.使用map_search获取敌方指挥中心的坐标B。
 3.使用distance_calculation计算我方直升机和敌方指挥中心的距离C。
 4.对比续航里程A和距离C，确认是否在作战范围内。
+
 React_data:
 Thought: 首先，我需要使用knowledge_graph来获取直升机的续航里程。
 Action: knowledge_graph
