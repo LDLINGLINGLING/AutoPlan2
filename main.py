@@ -131,8 +131,11 @@ def get_complex_question():
             enforce_eager=True,
             gpu_memory_utilization=0.8,
         )
-    with open(complex_example_json,'r',encoding='utf-8') as f:
-        examples = json.load(f)
+    if complex_example_json.endswith('json'):
+        with open(complex_example_json,'r',encoding='utf-8') as f:
+            examples = json.load(f)
+    else:
+        examples = []
     all_questions = []
     questions = []
     for example in examples:
@@ -319,7 +322,7 @@ def get_complex_react_data():
                 }
             )
 
-            with open(save_react_qa_json, "w", encoding="utf-8") as f:
+            with open(save_complex_react_qa_json, "w", encoding="utf-8") as f:
                 json.dump(react_qa, f, ensure_ascii=False, indent=4)
                 print("{}条react qa数据已经保存到{}".format(len(react_qa), save_react_qa_json))
 
@@ -328,4 +331,3 @@ if __name__ == "__main__":
     #get_complex_question()
     #get_react_data # 获取agent执行过程数据
     get_complex_react_data() # 获取复杂agent的执行过程数据
-    # get_cpm_function_call() #

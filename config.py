@@ -1,14 +1,7 @@
-cpm3_path = "/root/ld/ld_model_pretrained/minicpm3" # if you  want to get react data，cpm3_path can be none
+### 必须设置的项
 model_path = "/root/ld/ld_model_pretrain/Qwen2.5-72B-Instruct-GPTQ-Int4"  # 教师模型地址
-save_question_json = "/root/ld/ld_project/MiniCPM-CookBook/agent_demo/plan_example.json"  # 保存query的json地址
-save_complex_question_json = "/root/ld/ld_project/MiniCPM-CookBook/agent_demo/question_complex_react.json"
-save_react_qa_json = "/root/ld/ld_project/MiniCPM-CookBook/agent_demo/react_qa_react.json"  # 保存react的json地址
-inference_batch_size = 8  # 教师模型生成数据时的batch
 gen_datas_per_tool = 10  # 每个tool生成多少条react数据
-cpm3_data_save_path = "/root/ld/ld_project/pull_request/MiniCPM_Series_Tutorial/agent_demo/cpm3_fc_train_data.json"  # cpm3的数据保存json地址
-complex_example_json = '/root/ld/ld_project/MiniCPM-CookBook/agent_demo/plan_example.json'
-
-params_dict = {
+params_dict = { # vllm的生成参数
     "n": 1,
     "best_of": 1,
     "presence_penalty": 1,
@@ -24,3 +17,24 @@ params_dict = {
     "prompt_logprobs": None,
     "skip_special_tokens": True,
 }
+
+
+### 调用get_question函数，获取单链条agent的问题
+save_question_json = "AutoPlan2/data_demo/question_react_11_03.json"  # 保存query的json地址
+
+### 调用get_react_data函数，获取简单Agent的训练数据
+save_question_json = "AutoPlan2/data_demo/question_react_11_03.json"  # 用于作为react数据的输入
+save_react_qa_json = "AutoPlan2/datademo/react_qa_react.json"  # 用于保存单链条Agent训练数据
+inference_batch_size = 8  # 教师模型生成数据时的batch
+
+### 调用get_complex_question函数，获取长链条agent数据
+save_complex_question_json = "AutoPlan2/datademo/question_complex_react.json" # 用于保存长链条复杂任务的query
+
+### 调用get_complex_react_data函数，获取长链条agent训练数据
+save_complex_question_json = "AutoPlan2/datademo/question_complex_react.json" # 用于保存长链条复杂任务的query
+complex_example_json = 'AutoPlan2/datademo/plan_example.json' # 用于长链条复杂任务的任务规划示例，请参考示例文件，最少写一个
+save_complex_react_qa_json = 'AutoPlan2/data_demo/question_react_11_03.json'
+inference_batch_size = 8  # 教师模型生成数据时的batch
+
+
+

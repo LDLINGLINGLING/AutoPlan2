@@ -1,0 +1,8 @@
+[
+    {
+        "确定我方直升机与哪个敌方单位距离最近，并描述该敌方单位。": "1.使用map_search获取我方直升机的位置A和其他所有单位的位置B。\n2.使用distance_calculation计算我方直升机与所有敌方单位之间的距离C。\n3.找到距离最近的敌方单位D，\n4.用military_information_search获取敌方单位D的详细信息。"
+    },
+    {
+        "请核实敌方的敌坦克是否在我方火箭炮的打击范围内。": "1.使用map_search确定敌坦克的位置A。\n2.使用knowledge_graph查询我方火箭炮的射程B。\n3.使用distance_calculation计算火箭炮和敌坦克的距离C。\n4.，判断射程我方火箭炮射程 B 是否大于距离 C。"
+    }
+]
