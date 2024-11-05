@@ -52,7 +52,8 @@ Thought: 我已经得到了我方直升机和敌方指挥中心的距离是54.1k
 Action: python_math\nAction Input: {\"math_formulation\": \"500 > 54.1\"}
 Observation: 执行结果是True\nThought: 由于500km大于54.1km，所以我方直升机的最大作战范围内包含敌方的指挥中心位置。
 Final Answer: 我方直升机的最大作战范围内包含敌方的指挥中心位置。
-
+```
+```plantext
 Question2:请选择武器打击敌方坦克，打击后将结果图片给到张三将军.
 
 Plan:
