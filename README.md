@@ -55,7 +55,7 @@ Final Answer: 我方直升机的最大作战范围内包含敌方的指挥中心
 ```
 
 # 使用方法
-1. 首先修改config.py配置文件,config.py文件中已有注释。
+1. 首先修改config.py配置文件,[config.py](./config.py)文件中已有注释。
 2. 修改tools_caption.py文件，填写Agent需要调用工具的配置（可多个）。
 ```python
 tools=[
