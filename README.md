@@ -30,7 +30,7 @@
 ## [零人工构造长链条数据](./data_demo)
 ### 以下数据为500条中随意挑选，未经任何人工修改或者挑选。
 ```plantext
-Question:
+Question1:
 确认我方直升机的最大作战范围内是否包含敌方的指挥中心位置。
 
 Plan:
@@ -51,7 +51,61 @@ Action: distance_calculation\nAction Input: {\"weapon_query\": \"{\\\"我方直�
 Thought: 我已经得到了我方直升机和敌方指挥中心的距离是54.1km，现在需要对比这个距离与直升机的续航里程。
 Action: python_math\nAction Input: {\"math_formulation\": \"500 > 54.1\"}
 Observation: 执行结果是True\nThought: 由于500km大于54.1km，所以我方直升机的最大作战范围内包含敌方的指挥中心位置。
-Final Answer: 我方直升机的最大作战范围内包含敌方的指挥中心位置。"
+Final Answer: 我方直升机的最大作战范围内包含敌方的指挥中心位置。
+
+Question2:请选择武器打击敌方坦克，打击后将结果图片给到张三将军.
+
+Plan:
+1.使用map_search获取敌方坦克的位置坐标A
+2.使用knowledge_graph查询敌方坦克的克制武器B
+3.使用weapon_launch发射克制武器B打击敌方坦克位置坐标A
+4.使用map_search查询克制武器B的位置坐标C
+5.使用knowledge_graph获取克制武器B的速度D
+6.使用distance_calculation计算克制武器B的位置坐标C到敌方坦克的位置坐标A的距离E
+7.根据距离E和速度D计算武器飞行时间F
+8.使用Situation_display显示敌方坦克位置坐标A,获得图片G
+9.使用address_book查询张三将军的QQ_EmailH。
+10.F时间后使用QQ_Email将图片C发送到张三将军的QQ_EmailH
+
+React_data:
+Thought: 首先，我需要使用map_search来获取敌方坦克的位置坐标A。
+Action: map_search
+Action Input: {\"lauch\": \"敌坦克\"}
+Observation: {'我方直升机': [100, 80], '敌直升机': [170, 45], '我方指挥所': [0, 2], '敌坦克': [20, 13], '我方火箭炮': [100, 120], '我方发射阵地1': [50, 70], '我方发射阵地2': [150, 170], '敌指挥中心': [70, 35], '敌反坦克导弹': [50, 100], '我方坦克': [32, 21]} 
+Thought: 我已经获取到了敌方坦克的位置坐标A，接下来需要使用knowledge_graph查询克制敌方坦克的武器B。
+Action: knowledge_graph\nAction Input: {\"weapon_query\": \"敌坦克\", \"attribute\": \"克制武器\"}
+Observation: '豹2A7坦克': { '克制武器': '反坦克导弹'} 
+Thought: 我已经获取到了克制敌方坦克的武器B，接下来需要使用weapon_launch发射克制武器B打击敌方坦克位置坐标A。
+Action: weapon_launch
+Action Input: {\"weapon_query\": \"反坦克导弹\", \"target_name\": \"敌坦克\", \"target_coordinate\": \"[20, 13]\"}
+Observation: 已启动反坦克导弹打击敌坦克打击位置：[20, 13] \nThought: 武器已经发射，接下来需要使用map_search查询克制武器B的位置坐标C。
+Action: map_search
+Action Input: {\"lauch\": \"反坦克导弹\"}
+Observation: { '敌反坦克导弹': [50, 100]} 
+Thought: 我已经获取到了克制武器B的位置坐标C，接下来需要使用knowledge_graph获取克制武器B的速度D。
+Action: knowledge_graph
+Action Input: {\"weapon_query\": \"反坦克导弹\", \"attribute\": \"速度\"}
+Observation: 反坦克导弹的速度是:200km/h 
+Thought: 我已经获取到了克制武器B的速度D，接下来需要使用distance_calculation计算克制武器B的位置坐标C到敌方坦克的位置坐标A的距离E。
+Action: distance_calculation
+Action Input: {\"weapon_query\": \"{'反坦克导弹':[50, 100]}\", \"map_dict\": \"{'敌坦克': [20, 13]}\"}
+Observation: 以下是所有单位与{'反坦克导弹': [50, 100]}的距离:{'敌坦克': '92.0km'} 
+Thought: 我已经获取到了克制武器B的位置坐标C到敌方坦克的位置坐标A的距离E，接下来需要根据距离E和速度D计算武器飞行时间F。
+Action: python_math
+Action Input: {\"math_formulation\": \"92.0/200\"}
+Observation: 执行结果是0.46 
+Thought: 我已经计算出了武器飞行时间F，接下来需要使用Situation_display显示敌方坦克位置坐标A,获得图片G。
+Action: Situation_display
+Action Input: {\"coordinate\": \"[20, 13]\", \"radio\": \"300\"}\nObservation: 已经显示以[20, 13]为中心以300为半径的态势地图,图片地址为/ai/ld/picture1.png 
+Thought: 我已经获取到了图片G，接下来需要使用address_book查询张三将军的QQ_EmailH。
+Action: address_book
+Action Input: {\"person_name\": \"张三\"}
+Observation: {'邮箱': '45123456@qq.com', '电话': '13713156111', '部队': '黑狐坦克', '职务': '副总师'} 
+Thought: 我已经获取到了张三将军的QQ_EmailH，接下来需要使用QQ_Email将图片C发送到张三将军的QQ_EmailH。
+Action: QQ_Email
+Action Input: {\"E-mail_address\": \"45123456@qq.com\", \"E-mail_content\": \"打击敌方坦克的结果如图所示：/ai/ld/picture1.png\"}
+Observation: 已将打击敌方坦克的结果如图所示：/ai/ld/picture1.png发送到45123456@qq.com \nThought: 我已经完成了所有任务。
+Final Answer: 通过以上步骤，我成功使用反坦克导弹打击了敌方坦克
 ```
 
 # 使用方法
