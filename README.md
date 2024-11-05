@@ -29,7 +29,7 @@
 # 效果展示：
 ## [零人工构造长链条数据](./data_demo)
 ### 以下数据为500条中随意挑选，未经任何人工修改或者挑选。
-```plantext
+```plaintext
 Question1:
 确认我方直升机的最大作战范围内是否包含敌方的指挥中心位置。
 
@@ -53,7 +53,7 @@ Action: python_math\nAction Input: {\"math_formulation\": \"500 > 54.1\"}
 Observation: 执行结果是True\nThought: 由于500km大于54.1km，所以我方直升机的最大作战范围内包含敌方的指挥中心位置。
 Final Answer: 我方直升机的最大作战范围内包含敌方的指挥中心位置。
 ```
-```plantext
+```plaintext
 Question2:请选择武器打击敌方坦克，打击后将结果图片给到张三将军.
 
 Plan:
@@ -111,7 +111,7 @@ Final Answer: 通过以上步骤，我成功使用反坦克导弹打击了敌方
 
 # 使用方法
 1. 首先修改config.py配置文件,[config.py](./config.py)文件中已有注释。
-2. 修改tools_caption.py文件，填写Agent需要调用工具的配置（可多个）。
+2. 修改tools_caption.py文件，填写Agent需要调用工具的配置（可多个），以下是一个示例。
 ```python
 tools=[
   {
@@ -139,7 +139,7 @@ tools=[
     }
     ]
 ```
-3. 对于第二步中"excute_function": True的工具，需要在tools_call.py的文件中进行实现。
+3. 对于第二步中"excute_function": True的工具，需要在tools_call.py的文件中进行实现,以下是一个示例。
 ```python
 if plugin_name == "knowledge_graph":
         weapon_name = args_dict["weapon_query"] # 输入参数的解析，需要和第步中参数的name值相同(weapon_query)
