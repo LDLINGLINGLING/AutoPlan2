@@ -1,6 +1,6 @@
 # AutoPlan
 [English](./readme_en.md)
-## AutoPlan1
+## [AutoPlan1](https://github.com/LDLINGLINGLING/AutoPlan)
 
 ### 背景与挑战
 - 在AutoPlan1推出之前，市场上的智能代理（Agents）大多功能较为基础，面对复杂的问题处理能力有限。
