@@ -1,4 +1,4 @@
-### 必须设置的项
+### 必须设置的项，路径建议写绝对路径
 model_path = "/root/ld/ld_model_pretrain/Qwen2.5-72B-Instruct-GPTQ-Int4"  # 教师模型地址
 gen_datas_per_tool = 10  # 每个tool生成多少条react数据
 params_dict = { # vllm的生成参数
