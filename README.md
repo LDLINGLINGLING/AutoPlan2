@@ -74,7 +74,8 @@ Action: map_search
 Action Input: {\"lauch\": \"敌坦克\"}
 Observation: {'我方直升机': [100, 80], '敌直升机': [170, 45], '我方指挥所': [0, 2], '敌坦克': [20, 13], '我方火箭炮': [100, 120], '我方发射阵地1': [50, 70], '我方发射阵地2': [150, 170], '敌指挥中心': [70, 35], '敌反坦克导弹': [50, 100], '我方坦克': [32, 21]} 
 Thought: 我已经获取到了敌方坦克的位置坐标A，接下来需要使用knowledge_graph查询克制敌方坦克的武器B。
-Action: knowledge_graph\nAction Input: {\"weapon_query\": \"敌坦克\", \"attribute\": \"克制武器\"}
+Action: knowledge_graph
+Action Input: {\"weapon_query\": \"敌坦克\", \"attribute\": \"克制武器\"}
 Observation: '豹2A7坦克': { '克制武器': '反坦克导弹'} 
 Thought: 我已经获取到了克制敌方坦克的武器B，接下来需要使用weapon_launch发射克制武器B打击敌方坦克位置坐标A。
 Action: weapon_launch
