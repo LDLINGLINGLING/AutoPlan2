@@ -1,6 +1,6 @@
 # AutoPlan
 [English](./readme_en.md)
-## [AutoPlan1](https://github.com/LDLINGLINGLING/AutoPlan2)
+## AutoPlan1
 
 ### 背景与挑战
 - 在AutoPlan1推出之前，市场上的智能代理（Agents）大多功能较为基础，面对复杂的问题处理能力有限。
@@ -24,7 +24,8 @@
 - **核心目标**：AutoPlan2项目致力于降低新Agent的创建门槛，特别是针对那些要求迅速上线且性能稳定的场合。
 - **关键技术点**：
   - **冷启动优化**：开发了一套机制使得即使是初次接触某一领域的Agent也能基于现有知识库快速形成初步服务能力。
-  - **成本控制**：通过自动化工具减少对人工干预的需求，在保证至少90%服务准确性的同时，力求将复杂Agent的数据准备成本降低到AutoPlan1的10%以下。
+  - **成本控制**：通过自动化工具减少对人工干预的需求，在保证至少90%服务准确性的同时，力求将复杂Agent的数据准备成本控制在总成本的10%以内。
+  - **兼容性增强**：确保即使是为简单任务设计的Agent也能无缝接入更加复杂的系统中使用，无需额外调整。
 # 效果展示：
 ## [零人工构造长链条数据](./data_demo)
 ### 以下数据为500条中随意挑选，未经任何人工修改或者挑选。
@@ -53,8 +54,7 @@ Observation: 执行结果是True\nThought: 由于500km大于54.1km，所以我�
 Final Answer: 我方直升机的最大作战范围内包含敌方的指挥中心位置。
 ```
 ```plaintext
-Question2:
-请选择武器打击敌方坦克，打击后将结果图片给到张三将军.
+Question2:请选择武器打击敌方坦克，打击后将结果图片给到张三将军.
 
 Plan:
 1.使用map_search获取敌方坦克的位置坐标A
@@ -74,8 +74,7 @@ Action: map_search
 Action Input: {\"lauch\": \"敌坦克\"}
 Observation: {'我方直升机': [100, 80], '敌直升机': [170, 45], '我方指挥所': [0, 2], '敌坦克': [20, 13], '我方火箭炮': [100, 120], '我方发射阵地1': [50, 70], '我方发射阵地2': [150, 170], '敌指挥中心': [70, 35], '敌反坦克导弹': [50, 100], '我方坦克': [32, 21]} 
 Thought: 我已经获取到了敌方坦克的位置坐标A，接下来需要使用knowledge_graph查询克制敌方坦克的武器B。
-Action: knowledge_graph
-Action Input: {\"weapon_query\": \"敌坦克\", \"attribute\": \"克制武器\"}
+Action: knowledge_graph\nAction Input: {\"weapon_query\": \"敌坦克\", \"attribute\": \"克制武器\"}
 Observation: '豹2A7坦克': { '克制武器': '反坦克导弹'} 
 Thought: 我已经获取到了克制敌方坦克的武器B，接下来需要使用weapon_launch发射克制武器B打击敌方坦克位置坐标A。
 Action: weapon_launch
@@ -98,8 +97,7 @@ Action Input: {\"math_formulation\": \"92.0/200\"}
 Observation: 执行结果是0.46 
 Thought: 我已经计算出了武器飞行时间F，接下来需要使用Situation_display显示敌方坦克位置坐标A,获得图片G。
 Action: Situation_display
-Action Input: {\"coordinate\": \"[20, 13]\", \"radio\": \"300\"}
-Observation: 已经显示以[20, 13]为中心以300为半径的态势地图,图片地址为/ai/ld/picture1.png 
+Action Input: {\"coordinate\": \"[20, 13]\", \"radio\": \"300\"}\nObservation: 已经显示以[20, 13]为中心以300为半径的态势地图,图片地址为/ai/ld/picture1.png 
 Thought: 我已经获取到了图片G，接下来需要使用address_book查询张三将军的QQ_EmailH。
 Action: address_book
 Action Input: {\"person_name\": \"张三\"}
@@ -107,8 +105,7 @@ Observation: {'邮箱': '45123456@qq.com', '电话': '13713156111', '部队': '�
 Thought: 我已经获取到了张三将军的QQ_EmailH，接下来需要使用QQ_Email将图片C发送到张三将军的QQ_EmailH。
 Action: QQ_Email
 Action Input: {\"E-mail_address\": \"45123456@qq.com\", \"E-mail_content\": \"打击敌方坦克的结果如图所示：/ai/ld/picture1.png\"}
-Observation: 已将打击敌方坦克的结果如图所示：/ai/ld/picture1.png发送到45123456@qq.com
-Thought: 我已经完成了所有任务。
+Observation: 已将打击敌方坦克的结果如图所示：/ai/ld/picture1.png发送到45123456@qq.com \nThought: 我已经完成了所有任务。
 Final Answer: 通过以上步骤，我成功使用反坦克导弹打击了敌方坦克
 ```
 

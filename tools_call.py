@@ -193,7 +193,7 @@ def function_call(plugin_name, plugin_args,llm,tokenizer):
         distance_list=distance(weapon,coordinate)
         min_distance_unit=min(distance_list[1],key=distance_list[1].get)
         max_distance_unit=max(distance_list[1],key=distance_list[1].get)
-        return '以下是所有单位与{}的距离:{}'.format(weapon,str(distance_list[1]))
+        return '以下是所有单位与{}的距离:{}'.format(list(weapon.keys())[0],str(distance_list[1]))
     elif plugin_name=='python_math':#这里是计算距离的api
         import json
         args_dict = json.loads(plugin_args)

@@ -153,7 +153,7 @@ tools = [
             'name_for_human': '地图',
             'name_for_model': 'map_search',
             'excute_function':True,
-            'example':'我方直升机的地址在哪里',
+            'example':'我方直升机的现在在哪里',
             'description_for_model': '地图是一个可以查询地图上所有单位位置信息的工具，返回所有敌军的位置信息。',
             'parameters': [
                 {
@@ -170,7 +170,7 @@ tools = [
             'name_for_model': 'python_math',
             'excute_function':True,
             'example':'100//3+20**2',
-            'description_for_model': 'python计算器可以通过python的eval()函数计算出输入的字符串表达式结果并返回,表达式仅包含数字、加减乘除、逻辑运算符',
+            'description_for_model': 'python计算器可以通过python的eval()函数计算出输入的字符串表达式结果并返回,表达式仅包含数字、加减乘除、逻辑运算符、次方运算',
             'parameters': [
                 {
                     'name': 'math_formulation',
@@ -212,27 +212,27 @@ tools = [
                 }
             ],
         },
-        {
-            'name_for_human': '数学计算',
-            'name_for_model': 'math_model',
-            'excute_function':True,
-            'example':'根据飞机速度和A、B两地的距离，计算来回一次时间',
-            'description_for_model': '使用大语言模型完成一系列的推理问题如基本的加减乘除、最大、最小计算',
-            'parameters': [
-                {
-                    'name': 'question',
-                    'description': '当前的问题，需要清楚的给足背景知识',
-                    'scope':'加、减、乘、除、平方、开平方等基本算数操作',
-                    'required': True,
-                    'schema': {'type': 'string'},
-                }
-            ],
-        },
+        # {
+        #     'name_for_human': '数学计算',
+        #     'name_for_model': 'math_model',
+        #     'excute_function':True,
+        #     'example':'根据飞机速度和A、B两地的距离，计算来回一次时间',
+        #     'description_for_model': '使用大语言模型完成一系列的推理问题如基本的加减乘除、最大、最小计算',
+        #     'parameters': [
+        #         {
+        #             'name': 'question',
+        #             'description': '当前的问题，需要清楚的给足背景知识',
+        #             'scope':'加、减、乘、除、平方、开平方等基本算数操作',
+        #             'required': True,
+        #             'schema': {'type': 'string'},
+        #         }
+        #     ],
+        # },
         {
             'name_for_human': '距离计算器',
             'name_for_model': 'distance_calculation',
             'excute_function':True,
-            'example':'计算我方直升机[200,300]和其他所有单位的距离',
+            'example':'计算我方直升机[200,300]和我方指挥所[100,200]的距离',
             'description_for_model': '会将map_dict上所有单位都与weapon_query进行距离计算，返回map_dict上每一个单位和weapon_query的距离',
             'parameters': [
                 {
