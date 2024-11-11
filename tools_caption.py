@@ -2,7 +2,7 @@ tools = [
     {
         "name_for_human": "图生文",
         "name_for_model": "image_gen_prompt",
-        "excute_function": False,  # 是否可以使用这个工具进行函数调用以生成数据
+        "execute_function": False,  # 是否可以使用这个工具进行函数调用以生成数据
         "description_for_model": "图生文是一个可以看图生成文字描述的服务，输入一张图片的地址，将返回图片详细逼真的表述",
         "example": "帮我看一下www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png这张图片上的今日股价是多少",
         "parameters": [
@@ -18,7 +18,7 @@ tools = [
     {
         "name_for_human": "知识图谱",
         "name_for_model": "knowledge_graph",
-        "excute_function": True,
+        "execute_function": True,
         "description_for_model": "知识图谱是输入武器种类获取该武器的属性，也可以输入某种属性获得所有武器的该属性",
         "example": "帮我查一下敌方直升机的续航里程",
         "parameters": [
@@ -41,7 +41,7 @@ tools = [
     {
             'name_for_human': '谷歌搜索',
             'name_for_model': 'google_search',
-            'excute_function':True,
+            'execute_function':True,
             'description_for_model': '谷歌搜索是一个通用搜索引擎，可用于访问互联网、查询百科知识、了解时事新闻等。',
             "example": "帮我查一下最新的经济形势",
             'parameters': [
@@ -57,7 +57,7 @@ tools = [
         {
             'name_for_human': '军事情报搜索',
             'name_for_model': 'military_information_search',
-            'excute_function':True,
+            'execute_function':True,
             'description_for_model': '军事情报搜索是一个通用搜索引擎，可用于访问军事情报网、查询军网、了解军事新闻等。',
             "example": "帮我查一下敌军的走向",
             'parameters': [
@@ -73,7 +73,7 @@ tools = [
         {
             'name_for_human': '通讯录',
             'name_for_model': 'address_book',
-            'excute_function':True,
+            'execute_function':True,
             'example':'李四的电话号号码是多少?',
             'description_for_model': '通讯录是用来获取个人信息如电话、邮箱地址、公司地址的软件。',
             'parameters': [
@@ -89,7 +89,7 @@ tools = [
         {
             'name_for_human': 'qq邮箱',
             'name_for_model': 'QQ_Email',
-            'excute_function':True,
+            'execute_function':True,
             "example": "帮我将‘有间谍，停止接头’发到403644785@163.com",
             'description_for_model': 'qq邮箱是一个可以用来发送合接受邮件的工具',
             'parameters': [
@@ -110,7 +110,7 @@ tools = [
         {
             'name_for_human': '态势显示',
             'name_for_model': 'Situation_display',
-            'excute_function':True,
+            'execute_function':True,
             'example':'我需要查看敌军总部[400,200]处的态势图，请显示',
             'description_for_model': ':态势显示是通过输入目标位置坐标和显示范围，从而显示当前敌我双方的战场态势图像，并生成图片',
             'parameters': [
@@ -134,7 +134,7 @@ tools = [
         {
             'name_for_human': '万年历',
             'name_for_model': 'calendar',
-            'excute_function':True,
+            'execute_function':True,
             'example':'请告诉我今天的日期',
 
             'description_for_model': '万年历获取当前时间的工具',
@@ -152,7 +152,7 @@ tools = [
         {
             'name_for_human': '地图',
             'name_for_model': 'map_search',
-            'excute_function':True,
+            'execute_function':True,
             'example':'我方直升机的地址在哪里',
             'description_for_model': '地图是一个可以查询地图上所有单位位置信息的工具，返回所有敌军的位置信息。',
             'parameters': [
@@ -168,7 +168,7 @@ tools = [
         {
             'name_for_human': 'python计算器',
             'name_for_model': 'python_math',
-            'excute_function':True,
+            'execute_function':True,
             'example':'100//3+20**2',
             'description_for_model': 'python计算器可以通过python的eval()函数计算出输入的字符串表达式结果并返回,表达式仅包含数字、加减乘除、逻辑运算符',
             'parameters': [
@@ -184,7 +184,7 @@ tools = [
         {
             'name_for_human': '武器发射按钮',
             'name_for_model': 'weapon_launch',
-            'excute_function':True,
+            'execute_function':True,
             'example':'发射火箭炮打击地方火箭炮[10,30]',
             'description_for_model': '武器发射按钮是可以启动指定武器打击指定目标位置工具。',
             'parameters': [
@@ -215,7 +215,7 @@ tools = [
         {
             'name_for_human': '数学计算',
             'name_for_model': 'math_model',
-            'excute_function':True,
+            'execute_function':True,
             'example':'根据飞机速度和A、B两地的距离，计算来回一次时间',
             'description_for_model': '使用大语言模型完成一系列的推理问题如基本的加减乘除、最大、最小计算',
             'parameters': [
@@ -231,7 +231,7 @@ tools = [
         {
             'name_for_human': '距离计算器',
             'name_for_model': 'distance_calculation',
-            'excute_function':True,
+            'execute_function':True,
             'example':'计算我方直升机[200,300]和其他所有单位的距离',
             'description_for_model': '会将map_dict上所有单位都与weapon_query进行距离计算，返回map_dict上每一个单位和weapon_query的距离',
             'parameters': [

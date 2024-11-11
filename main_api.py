@@ -114,17 +114,7 @@ def get_tool_description(tool):
 
 
 def get_question():
-    if 'llm' not in locals():
-        llm = LLM(
-            model=model_path,
-            tensor_parallel_size=8,
-            max_model_len=4096,
-            dtype="bfloat16",
-            trust_remote_code=True,
-            enforce_eager=True,
-            gpu_memory_utilization=0.8,
-        )
-
+    
     prompt_template = """你是一个智能助手，现在我请你为以下工具生成问题，要求生成的问题能够被这个工具解决。工具的详细介绍如下：\n{}\n我现在给你一个关于此工具问题的示例「问题开始」
     {}「问题结束」,接下来请你根据此示例和工具描述再生成{}个能够使用该工具解决的问题，并且用「问题开始」和「问题结束」将其包裹,不要生成其他的无关文字。"""
 
@@ -141,8 +131,17 @@ def get_question():
             input_prompt = """<|im_start|> system\n you are a helpful assistant<|im_end|>\n<|im_start|> user\n {}<|im_end|>\n<|im_start|> assistant\n""".format(
                 input_prompt
             )
-            outputs = llm.generate(input_prompt, sampling_params)
-            output = outputs[0].outputs[0].text
+            # for api call, you will need to manually pass params
+            output = client.chat.completions.create(
+                messages = [
+                    {
+                        "role": "user",
+                        "content": input_prompt
+                    },
+                ],
+                model = model_name,
+            ).choices[0].message.content
+
             questions.extend(get_answer_from_output(output))
 
             if len(questions) >= gen_datas_per_tool:
@@ -213,7 +212,6 @@ def get_complex_question():
             json.dump(all_questions, f, ensure_ascii=False, indent=4)
             print("{}条输入指令已经保存到{}".format(len(all_questions), save_complex_question_json))
 
-# TODO use api instead local model
 def get_react_data():
     
     with open(save_question_json, "r", encoding="utf-8") as file:
@@ -228,38 +226,66 @@ def get_react_data():
 
     react_qa = []
     for index in range(0, len(react_question), inference_batch_size):
-        outputs = llm.generate(
-            react_question[index : index + inference_batch_size], sampling_params
-        ) # stop at observe
+        # stop at observation
+        outputs = [
+            client.chat.completions.create(
+                messages=[
+                    {
+                        "role": "user",
+                        "content": input
+                    },
+                ],
+                model=model_name,
+                stop = ["Observation:"],
+
+            ) for input in react_question[index : index + inference_batch_size] 
+        ] 
+        
         for i in range(len(outputs)):
             output = outputs[i].outputs[0].text
             
             plugin_name, plugin_args, text = parse_latest_plugin_call(output)
-            excute_flag = True
+            execute_flag = True
             for tool in tools:
                 print(tool)
                 if (
                     tool["name_for_model"] == plugin_name
-                    and tool["excute_function"] == False
+                    and tool["execute_function"] == False
                 ):
-                    excute_flag = False
+                    execute_flag = False
                     second_input = (
                         react_question[index + i] + output + "Observation: "
                     )
-                    output2 = (
-                        llm.generate(second_input, sampling_params)[0]
-                        .outputs[0]
-                        .text
-                    )
-            # observe | ass | cont.....
-            if excute_flag:
-                observation = function_call(plugin_name, plugin_args,llm,tokenizer)
+                    
+                    output2 = client.chat.completions.create(
+                        messages=[
+                            {
+                                "role": "user",
+                                "content": second_input
+                            },
+                        ],
+                        model=model_name,
+                        stop = ["Observation:"],
+                    ).choices[0].message.content
+            # observe | ass | content.....
+            if execute_flag:
+                observation = function_call(plugin_name, plugin_args, client)
                 second_input = (
                     react_question[index + i]
                     + output
                     + "Observation: {}".format(observation)
                 )
-            output2 = llm.generate(second_input, sampling_params)[0].outputs[0].text
+
+            output2 = client.chat.completions.create(
+                        messages=[
+                            {
+                                "role": "user",
+                                "content": second_input
+                            },
+                        ],
+                        model=model_name,
+                        stop = ["Observation:"],
+            ).choices[0].message.content
             print(output2)
             # react_qa.append({react_question[index+i]: second_input[len(react_question[index+i]):]+output2})
             react_qa.append(
@@ -305,7 +331,6 @@ def get_complex_react_data():
                 ) for input in react_question[index : index + inference_batch_size] 
             ] 
         # task 1 2 3 
-        pdb.set_trace()
         
         for i in range(len(outputs)):
             output = outputs[i].choices[0].message.content
@@ -313,13 +338,13 @@ def get_complex_react_data():
             try:
                 while 'Final Answer' not in output:
                     plugin_name, plugin_args, text = parse_latest_plugin_call(output)
-                    excute_flag = True
+                    execute_flag = True
                     for tool in tools:
                         if (
                             tool["name_for_model"] == plugin_name
-                            and tool["excute_function"] == False
+                            and tool["execute_function"] == False
                         ):
-                            excute_flag = False
+                            execute_flag = False
                             second_input = (
                                 all_output + "Observation: "
                             )
@@ -337,7 +362,7 @@ def get_complex_react_data():
                             )
                             all_output += "Observation: " + output
                             
-                    if excute_flag:
+                    if execute_flag:
                         observation = function_call(plugin_name, plugin_args, client)
                         second_input = (
                             all_output
@@ -374,6 +399,7 @@ def get_complex_react_data():
         print("{}条react qa数据已经保存到{}".format(len(react_qa), save_react_qa_json))
 
 if __name__ == "__main__":
-    # 1
+    # 1. gen query and plan data
     get_complex_question()
+    # 2. gen react execution data
     # get_complex_react_data()

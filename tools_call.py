@@ -1,7 +1,10 @@
 import json5
 import re
 import math
-def function_call(plugin_name, plugin_args,llm,tokenizer):
+model_name = "gpt-4o"#"o1-preview"
+
+
+def function_call(plugin_name, plugin_args, client):
     args_dict = json5.loads(plugin_args)
     if plugin_name == "knowledge_graph":
         weapon_name = args_dict["weapon_query"]
@@ -102,11 +105,17 @@ def function_call(plugin_name, plugin_args,llm,tokenizer):
             {"role": "system", "content":"You are a helpful assistant."},
             {"role": "user", "content": '现在请你模拟无所不知的百科全书，直接正面回复以下问题。'+search_query}
         ]
-        search_query= tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-        outputs = llm.generate(
-            search_query, 
-        )
-        return outputs[0].outputs[0].text
+
+        outputs = client.chat.completions.create(
+                messages=[
+                    {
+                        "role": "user",
+                        "content": messages
+                    },
+                ],
+                model=model_name,
+            )
+        return outputs.choices[0].message.content
         #return query_bing(search_query, max_tries=3,model=model,tokenizer=tokenizer)
     elif plugin_name == 'military_information_search':
         search_query=json5.loads(plugin_args)['search_query']
@@ -114,11 +123,16 @@ def function_call(plugin_name, plugin_args,llm,tokenizer):
             {"role": "system", "content":"You are a helpful assistant."},
             {"role": "user", "content": '现在请你模拟军事专家，直接正面回复以下问题。'+search_query}
         ]
-        search_query= tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-        outputs = llm.generate(
-            search_query, 
+        outputs = client.chat.completions.create(
+                messages=[
+                    {
+                        "role": "user",
+                        "content": messages
+                    },
+                ],
+                model=model_name,
         )
-        return outputs[0].outputs[0].text
+        return outputs.choices[0].message.content
         #return query_bing(search_query, max_tries=3,model=model,tokenizer=tokenizer)
 
     elif plugin_name == 'image_gen':
