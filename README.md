@@ -1,181 +1,192 @@
 # AutoPlan
-[English](./readme_en.md)
+
 ## [AutoPlan1](https://github.com/LDLINGLINGLING/AutoPlan)
+## [Chinese_readme]()
+### Background and Challenges
+- Before the launch of AutoPlan1, most intelligent agents (Agents) on the market had relatively basic functionalities with limited capability to handle complex problems.
+- These early Agents lacked the ability to process complex logic or perform long sequences of tasks, or even if they could attempt to solve them, the accuracy of their solutions was often unsatisfactory.
 
-### 背景与挑战
-- 在AutoPlan1推出之前，市场上的智能代理（Agents）大多功能较为基础，面对复杂的问题处理能力有限。
-- 这些早期的Agents缺乏处理复杂逻辑或执行长序列任务的能力，或者即便能够尝试解决，其解决方案的准确性也常常不尽如人意。
-
-### 目标与成果
-- **核心目的**：AutoPlan1旨在克服上述局限性，通过开发出能够胜任特定领域内更复杂工作的高级Agents。
-- **技术进步**：
-  - 引入了先进的算法和技术框架，显著提升了Agents在处理细分领域复杂任务时的表现。
-  - 提高了Agent系统的稳定性以及解决问题的准确度。
-  - 成功地从仅能执行简单任务的初级Agents过渡到了具备强大处理能力的高级Agents。
+### Goals and Achievements
+- **Core Purpose**: AutoPlan1 aims to overcome these limitations by developing advanced Agents capable of performing more complex work within specific domains.
+- **Technological Advancements**:
+  - The introduction of advanced algorithms and technical frameworks has significantly improved the performance of Agents in handling complex tasks within specialized areas.
+  - The stability of Agent systems and the accuracy of problem-solving have been enhanced.
+  - A successful transition from basic Agents that can only perform simple tasks to advanced Agents with powerful processing capabilities has been achieved.
 
 ## AutoPlan2
 
-### 新挑战与改进方向
-- 尽管AutoPlan1成功地提高了Agents应对复杂场景的能力，但这一过程中也暴露出了一些新的问题。
-  - 构建这类复杂Agent的成本较高，尤其是涉及到大量人工标注的数据准备阶段。
-  - 对于那些需要快速部署新类型Agent的应用场景来说，高昂的数据成本成为了阻碍因素之一。
+### New Challenges and Improvement Directions
+- Although AutoPlan1 successfully enhanced the Agents' ability to cope with complex scenarios, this process also exposed some new issues.
+  - The cost of building such complex Agents is high, especially during the data preparation phase, which involves extensive manual labeling.
+  - For application scenarios requiring rapid deployment of new types of Agents, the high costs became a hindrance.
 
-### 目标与创新
-- **核心目标**：AutoPlan2项目致力于降低新Agent的创建门槛，特别是针对那些要求迅速上线且性能稳定的场合。
-- **关键技术点**：
-  - **冷启动优化**：开发了一套机制使得即使是初次接触某一领域的Agent也能基于现有知识库快速形成初步服务能力。
-  - **成本控制**：通过自动化工具减少对人工干预的需求，在保证至少90%服务准确性的同时，力求将复杂Agent的数据准备成本控制在总成本的10%以内。
-  - **兼容性增强**：确保即使是为简单任务设计的Agent也能无缝接入更加复杂的系统中使用，无需额外调整。
-# 效果展示：
-## [零人工构造长链条数据](./data_demo)
-### 以下数据为500条中随意挑选，未经任何人工修改或者挑选。
+### Goals and Innovations
+- **Core Goal**: The AutoPlan2 project is dedicated to lowering the entry barrier for creating new Agents, particularly for those situations demanding swift deployment with stable performance.
+- **Key Technical Points**:
+  - **Cold Start Optimization**: Developed a mechanism allowing Agents, even when first encountering a particular domain, to quickly establish initial service capabilities based on existing knowledge bases.
+  - **Cost Control**: By employing automation tools, the need for human intervention is reduced, aiming to maintain at least 90% service accuracy while striving to limit the data preparation costs for complex Agents to no more than 10% of the total cost.
+  - **Enhanced Compatibility**: Ensures that Agents designed for simple tasks can be seamlessly integrated into more complex systems without additional adjustments.
+
+# Effect Demonstration:
+## [Zero Manual Construction of Long Chain Data](./data_demo)
+### The following data is randomly selected from 500 entries, without any manual modification or selection.
 ```plaintext
 Question1:
-确认我方直升机的最大作战范围内是否包含敌方的指挥中心位置。
+Confirm whether the maximum operational range of our helicopter includes the location of the enemy's command center.
 
 Plan:
-1.使用knowledge_graph获取直升机的续航里程A。
-2.使用map_search获取敌方指挥中心的坐标B。
-3.使用distance_calculation计算我方直升机和敌方指挥中心的距离C。
-4.对比续航里程A和距离C，确认是否在作战范围内。
+1. Use knowledge_graph to obtain the helicopter's endurance A.
+2. Use map_search to get the coordinates B of the enemy's command center.
+3. Use distance_calculation to calculate the distance C between our helicopter and the enemy's command center.
+4. Compare the endurance A with the distance C to confirm if it is within the operational range.
 
 React_data:
-Thought: 首先，我需要使用knowledge_graph来获取直升机的续航里程。
+Thought: First, I need to use knowledge_graph to get the helicopter's endurance.
 Action: knowledge_graph
-Action Input: {\"weapon_query\": \"直升机\", \"attribute\": \"续航\"}\nObservation: 直升机的续航是:500km
-Thought: 现在我知道了直升机的续航里程是500km，接下来我需要使用map_search来获取敌方指挥中心的坐标。
-Action: map_search\nAction Input: {\"lauch\": \"敌指挥中心\"}
-Observation: {'我方直升机': [100, 80], '敌直升机': [170, 45], '我方指挥所': [0, 2], '敌坦克': [20, 13], '我方火箭炮': [100, 120], '我方发射阵地1': [50, 70], '我方发射阵地2': [150, 170], '敌指挥中心': [70, 35], '敌反坦克导弹': [50, 100], '我方坦克': [32, 21]} 
-Thought: 我已经获取到了敌方指挥中心的坐标是[70, 35]，接下来我需要使用distance_calculation来计算我方直升机和敌方指挥中心的距离。
-Action: distance_calculation\nAction Input: {\"weapon_query\": \"{\\\"我方直升机\\\":[100,80]}\", \"map_dict\": \"{\\\"敌指挥中心\\\":[70,35]}\"}\nObservation: 以下是所有单位与{'我方直升机': [100, 80]}的距离:{'敌指挥中心': '54.1km'} 
-Thought: 我已经得到了我方直升机和敌方指挥中心的距离是54.1km，现在需要对比这个距离与直升机的续航里程。
-Action: python_math\nAction Input: {\"math_formulation\": \"500 > 54.1\"}
-Observation: 执行结果是True\nThought: 由于500km大于54.1km，所以我方直升机的最大作战范围内包含敌方的指挥中心位置。
-Final Answer: 我方直升机的最大作战范围内包含敌方的指挥中心位置。
+Action Input: {\"weapon_query\": \"helicopter\", \"attribute\": \"endurance\"}
+Observation: The helicopter's endurance is: 500km
+Thought: Now that I know the helicopter's endurance is 500km, next, I will use map_search to get the coordinates of the enemy's command center.
+Action: map_search
+Action Input: {\"launch\": \"enemy command center\"}
+Observation: {'our helicopter': [100, 80], 'enemy helicopter': [170, 45], 'our command post': [0, 2], 'enemy tank': [20, 13], 'our rocket launcher': [100, 120], 'our firing position 1': [50, 70], 'our firing position 2': [150, 170], 'enemy command center': [70, 35], 'enemy anti-tank missile': [50, 100], 'our tank': [32, 21]}
+Thought: I've obtained the coordinates of the enemy command center, which are [70, 35]. Next, I need to use distance_calculation to find the distance between our helicopter and the enemy command center.
+Action: distance_calculation
+Action Input: {\"weapon_query\": \"{\\\"our helicopter\\\":[100,80]}\", \"map_dict\": \"{\\\"enemy command center\\\":[70,35]}\"}
+Observation: Here are all the distances from {'our helicopter': [100, 80]}: {'enemy command center': '54.1km'}
+Thought: I've got the distance between our helicopter and the enemy command center, which is 54.1km. Now I need to compare this distance with the helicopter's endurance.
+Action: python_math
+Action Input: {\"math_formulation\": \"500 > 54.1\"}
+Observation: The result is True
+Thought: Since 500km is greater than 54.1km, our helicopter's maximum operational range does include the location of the enemy's command center.
+Final Answer: Our helicopter's maximum operational range includes the location of the enemy's command center.
 ```
 ```plaintext
-Question2:请选择武器打击敌方坦克，打击后将结果图片给到张三将军.
+Question2: Select a weapon to strike the enemy tank and send the result image to General Zhang San.
 
 Plan:
-1.使用map_search获取敌方坦克的位置坐标A
-2.使用knowledge_graph查询敌方坦克的克制武器B
-3.使用weapon_launch发射克制武器B打击敌方坦克位置坐标A
-4.使用map_search查询克制武器B的位置坐标C
-5.使用knowledge_graph获取克制武器B的速度D
-6.使用distance_calculation计算克制武器B的位置坐标C到敌方坦克的位置坐标A的距离E
-7.根据距离E和速度D计算武器飞行时间F
-8.使用Situation_display显示敌方坦克位置坐标A,获得图片G
-9.使用address_book查询张三将军的QQ_EmailH。
-10.F时间后使用QQ_Email将图片C发送到张三将军的QQ_EmailH
+1. Use map_search to get the location coordinates A of the enemy tank.
+2. Use knowledge_graph to query the counter-weapon B for the enemy tank.
+3. Use weapon_launch to fire the counter-weapon B at the enemy tank's location coordinates A.
+4. Use map_search to query the location coordinates C of the counter-weapon B.
+5. Use knowledge_graph to get the speed D of the counter-weapon B.
+6. Use distance_calculation to calculate the distance E from the counter-weapon B's location coordinates C to the enemy tank's location coordinates A.
+7. Calculate the weapon flight time F based on the distance E and speed D.
+8. Use Situation_display to show the enemy tank's location coordinates A and obtain the image G.
+9. Use address_book to look up General Zhang San's QQ Email H.
+10. After F time, use QQ_Email to send the image G to General Zhang San's QQ Email H.
 
 React_data:
-Thought: 首先，我需要使用map_search来获取敌方坦克的位置坐标A。
+Thought: First, I need to use map_search to get the location coordinates A of the enemy tank.
 Action: map_search
-Action Input: {\"lauch\": \"敌坦克\"}
-Observation: {'我方直升机': [100, 80], '敌直升机': [170, 45], '我方指挥所': [0, 2], '敌坦克': [20, 13], '我方火箭炮': [100, 120], '我方发射阵地1': [50, 70], '我方发射阵地2': [150, 170], '敌指挥中心': [70, 35], '敌反坦克导弹': [50, 100], '我方坦克': [32, 21]} 
-Thought: 我已经获取到了敌方坦克的位置坐标A，接下来需要使用knowledge_graph查询克制敌方坦克的武器B。
-Action: knowledge_graph\nAction Input: {\"weapon_query\": \"敌坦克\", \"attribute\": \"克制武器\"}
-Observation: '豹2A7坦克': { '克制武器': '反坦克导弹'} 
-Thought: 我已经获取到了克制敌方坦克的武器B，接下来需要使用weapon_launch发射克制武器B打击敌方坦克位置坐标A。
-Action: weapon_launch
-Action Input: {\"weapon_query\": \"反坦克导弹\", \"target_name\": \"敌坦克\", \"target_coordinate\": \"[20, 13]\"}
-Observation: 已启动反坦克导弹打击敌坦克打击位置：[20, 13] \nThought: 武器已经发射，接下来需要使用map_search查询克制武器B的位置坐标C。
-Action: map_search
-Action Input: {\"lauch\": \"反坦克导弹\"}
-Observation: { '敌反坦克导弹': [50, 100]} 
-Thought: 我已经获取到了克制武器B的位置坐标C，接下来需要使用knowledge_graph获取克制武器B的速度D。
+Action Input: {\"launch\": \"enemy tank\"}
+Observation: {'our helicopter': [100, 80], 'enemy helicopter': [170, 45], 'our command post': [0, 2], 'enemy tank': [20, 13], 'our rocket launcher': [100, 120], 'our firing position 1': [50, 70], 'our firing position 2': [150, 170], 'enemy command center': [70, 35], 'enemy anti-tank missile': [50, 100], 'our tank': [32, 21]}
+Thought: I've obtained the location coordinates A of the enemy tank. Next, I need to use knowledge_graph to query the counter-weapon B for the enemy tank.
 Action: knowledge_graph
-Action Input: {\"weapon_query\": \"反坦克导弹\", \"attribute\": \"速度\"}
-Observation: 反坦克导弹的速度是:200km/h 
-Thought: 我已经获取到了克制武器B的速度D，接下来需要使用distance_calculation计算克制武器B的位置坐标C到敌方坦克的位置坐标A的距离E。
+Action Input: {\"weapon_query\": \"enemy tank\", \"attribute\": \"counter-weapon\"}
+Observation: 'Leopard 2A7 Tank': {'counter-weapon': 'anti-tank missile'}
+Thought: I've obtained the counter-weapon B for the enemy tank. Next, I need to use weapon_launch to fire the counter-weapon B at the enemy tank's location coordinates A.
+Action: weapon_launch
+Action Input: {\"weapon_query\": \"anti-tank missile\", \"target_name\": \"enemy tank\", \"target_coordinate\": \"[20, 13]\"}
+Observation: Anti-tank missile launched at enemy tank; target location: [20, 13]
+Thought: The weapon has been launched. Next, I need to use map_search to query the location coordinates C of the counter-weapon B.
+Action: map_search
+Action Input: {\"launch\": \"anti-tank missile\"}
+Observation: {'enemy anti-tank missile': [50, 100]}
+Thought: I've obtained the location coordinates C of the counter-weapon B. Next, I need to use knowledge_graph to get the speed D of the counter-weapon B.
+Action: knowledge_graph
+Action Input: {\"weapon_query\": \"anti-tank missile\", \"attribute\": \"speed\"}
+Observation: The speed of the anti-tank missile is: 200km/h
+Thought: I've obtained the speed D of the counter-weapon B. Next, I need to use distance_calculation to calculate the distance E from the counter-weapon B's location coordinates C to the enemy tank's location coordinates A.
 Action: distance_calculation
-Action Input: {\"weapon_query\": \"{'反坦克导弹':[50, 100]}\", \"map_dict\": \"{'敌坦克': [20, 13]}\"}
-Observation: 以下是所有单位与{'反坦克导弹': [50, 100]}的距离:{'敌坦克': '92.0km'} 
-Thought: 我已经获取到了克制武器B的位置坐标C到敌方坦克的位置坐标A的距离E，接下来需要根据距离E和速度D计算武器飞行时间F。
+Action Input: {\"weapon_query\": \"{'anti-tank missile':[50, 100]}\", \"map_dict\": \"{'enemy tank': [20, 13]}\"}
+Observation: Here are all the distances from {'anti-tank missile': [50, 100]}: {'enemy tank': '92.0km'}
+Thought: I've obtained the distance E from the counter-weapon B's location coordinates C to the enemy tank's location coordinates A. Next, I need to calculate the weapon flight time F based on the distance E and speed D.
 Action: python_math
 Action Input: {\"math_formulation\": \"92.0/200\"}
-Observation: 执行结果是0.46 
-Thought: 我已经计算出了武器飞行时间F，接下来需要使用Situation_display显示敌方坦克位置坐标A,获得图片G。
+Observation: The result is 0.46
+Thought: I've calculated the weapon flight time F. Next, I need to use Situation_display to show the enemy tank's location coordinates A and obtain the image G.
 Action: Situation_display
-Action Input: {\"coordinate\": \"[20, 13]\", \"radio\": \"300\"}\nObservation: 已经显示以[20, 13]为中心以300为半径的态势地图,图片地址为/ai/ld/picture1.png 
-Thought: 我已经获取到了图片G，接下来需要使用address_book查询张三将军的QQ_EmailH。
+Action Input: {\"coordinate\": \"[20, 13]\", \"radius\": \"300\"}
+Observation: Displayed the situation map centered at [20, 13] with a radius of 300, the image URL is /ai/ld/picture1.png
+Thought: I've obtained the image G. Next, I need to use address_book to look up General Zhang San's QQ Email H.
 Action: address_book
-Action Input: {\"person_name\": \"张三\"}
-Observation: {'邮箱': '45123456@qq.com', '电话': '13713156111', '部队': '黑狐坦克', '职务': '副总师'} 
-Thought: 我已经获取到了张三将军的QQ_EmailH，接下来需要使用QQ_Email将图片C发送到张三将军的QQ_EmailH。
+Action Input: {\"person_name\": \"Zhang San\"}
+Observation: {'email': '45123456@qq.com', 'phone': '13713156111', 'unit': 'Black Fox Tank', 'position': 'Deputy Chief Engineer'}
+Thought: I've obtained General Zhang San's QQ Email H. Next, I need to use QQ_Email to send the image G to General Zhang San's QQ Email H.
 Action: QQ_Email
-Action Input: {\"E-mail_address\": \"45123456@qq.com\", \"E-mail_content\": \"打击敌方坦克的结果如图所示：/ai/ld/picture1.png\"}
-Observation: 已将打击敌方坦克的结果如图所示：/ai/ld/picture1.png发送到45123456@qq.com \nThought: 我已经完成了所有任务。
-Final Answer: 通过以上步骤，我成功使用反坦克导弹打击了敌方坦克
+Action Input: {\"E-mail_address\": \"45123456@qq.com\", \"E-mail_content\": \"The result of striking the enemy tank as shown in the image: /ai/ld/picture1.png\"}
+Observation: Sent the image showing the result of striking the enemy tank: /ai/ld/picture1.png to 45123456@qq.com
+Thought: I have completed all tasks.
+Final Answer: Through the above steps, I successfully used an anti-tank missile to strike the enemy tank.
 ```
 
-# 使用方法
-1. 首先修改config.py配置文件,[config.py](./config.py)文件中已有注释。
-2. 修改tools_caption.py文件，填写Agent需要调用工具的配置（可多个），以下是一个示例。
+# Usage Instructions
+1. First, modify the config.py configuration file. There are comments already in the [config.py](./config.py) file.
+2. Modify the tools_caption.py file, filling in the configurations for the tools that the Agent needs to call (multiple tools can be configured). Below is an example.
 ```python
 tools=[
   {
-        "name_for_human": "知识图谱", # name_for_human写工具名称，用来给模型提示，需要能够望文生义，
-        "name_for_model": "knowledge_graph", # name_for_model是函数名称，是真实调用工具的函数名
-        "excute_function": True, # excute_function表示构造数据时，是否真实的调用工具以获得更加高质量的数据。
-        "description_for_model": "知识图谱是输入武器种类获取该武器的属性，也可以输入某种属性获得所有武器的该属性",# description_for_model是用于提示模型，本工具的作用。需要描述清晰明了
-        "example": "帮我查一下敌方直升机的续航里程", # example 表示一个能使用本工具解决的问题。
+        "name_for_human": "Knowledge Graph", # name_for_human writes the tool name, which should be self-explanatory,
+        "name_for_model": "knowledge_graph", # name_for_model is the function name, which is the actual name called by the tool
+        "execute_function": True, # execute_function indicates whether the tool should be actually called to obtain higher quality data when constructing the data.
+        "description_for_model": "The Knowledge Graph inputs a type of weapon to obtain its attributes, or inputs an attribute to get all weapons' corresponding attributes", # description_for_model is a prompt for the model, explaining the purpose of the tool. It needs to be clear and concise.
+        "example": "Help me check the endurance of the enemy helicopter", # example represents a problem that can be solved using this tool.
         "parameters": [
             {
-                "name": "weapon_query",# 这是第一个参数名称
-                "description": "武器名称", # 这是对本参数的文字描述，用于提示模型，需要能够望文生义
-                "scope": ["直升机", '豹2A7坦克','黑狐坦克',"雷达",'装甲车','狙击枪', "反坦克导弹", "直升机", "火箭炮", "所有武器",'无人机','步兵'],  # 参数的取值范围
-                "required": True, # 这个参数是否是必须的
-                "schema": {"type": "string"}, # 本参数的数据结构类型
+                "name": "weapon_query", # This is the first parameter name
+                "description": "Weapon name", # This is a textual description of the parameter, used to prompt the model. It needs to be self-explanatory.
+                "scope": ["Helicopter", 'Leopard 2A7 Tank', 'Black Fox Tank', "Radar", 'Armored Vehicle', 'Sniper Rifle', "Anti-Tank Missile", "Helicopter", "Rocket Launcher", "All Weapons", 'Drone', 'Infantry'],  # The range of values for the parameter
+                "required": True, # Whether this parameter is required
+                "schema": {"type": "string"}, # The data structure type of this parameter
             },
             {
-                "name": "attribute",# 这是第二个参数名称
-                "description": "武器的属性",# 这是对本参数的文字描述，用于提示模型，需要能够望文生义
-                "scope": ['射程','携带武器','重量','速度','适应场景','克制武器','续航','满载人数','飞行高度','承载重量','所有属性','探测范围'],# 参数的取值范围
-                "required": True,# 这个参数是否是必须的
-                "schema": {"type": "string"},# 本参数的数据结构类型
+                "name": "attribute", # This is the second parameter name
+                "description": "Weapon attribute", # This is a textual description of the parameter, used to prompt the model. It needs to be self-explanatory.
+                "scope": ['Range', 'Carried Weapon', 'Weight', 'Speed', 'Adaptation Scenario', 'Counter-Weapon', 'Endurance', 'Full Load Personnel', 'Flight Altitude', 'Load Capacity', 'All Attributes', 'Detection Range'], # The range of values for the parameter
+                "required": True, # Whether this parameter is required
+                "schema": {"type": "string"}, # The data structure type of this parameter
             },
         ],
     }
     ]
 ```
-3. 对于第二步中"excute_function": True的工具，需要在tools_call.py的文件中进行实现,以下是一个示例。
+3. For the tools where "execute_function": True in step 2, implementation is needed in the tools_call.py file. Below is an example.
 ```python
 if plugin_name == "knowledge_graph":
-        weapon_name = args_dict["weapon_query"] # 输入参数的解析，需要和第步中参数的name值相同(weapon_query)
-        attribute = args_dict["attribute"] # 输入参数的解析，需要和第步中参数的name值相同(attribute)
+        weapon_name = args_dict["weapon_query"] # Parsing of input parameters, must match the name value of the parameter (weapon_query) in step 2
+        attribute = args_dict["attribute"] # Parsing of input parameters, must match the name value of the parameter (attribute) in step 2
         kg = {
-            "直升机": {
-                "飞行高度": "0.3km以内",
-                "携带武器": "火箭弹",
-                "克制武器": "对空导弹",
-                "重量": "3000kg",
-                "速度": "100km/h",
-                "射程": "2km",
-                "适应场景": "空战",
-                "续航": "500km",
-                "满载人数": "7人",
-                "承载重量": "10000kg",
-                "续航里程": "1000km",
+            "Helicopter": {
+                "Flight Altitude": "within 0.3km",
+                "Carried Weapon": "Rocket",
+                "Counter-Weapon": "Anti-Air Missile",
+                "Weight": "3000kg",
+                "Speed": "100km/h",
+                "Range": "2km",
+                "Adaptation Scenario": "Air Combat",
+                "Endurance": "500km",
+                "Full Load Personnel": "7 people",
+                "Load Capacity": "10000kg",
+                "Endurance Mileage": "1000km",
             },
-            #、、、、、、、、、、此处省略
-            "狙击枪": {"射程": "1.2km", "重量": "30kg", "适应场景": "暗杀"},
+            # Additional weapons and attributes omitted here...
+            "Sniper Rifle": {"Range": "1.2km", "Weight": "30kg", "Adaptation Scenario": "Assassination"},
         }
-        if weapon_name != "所有武器":
+        if weapon_name != "All Weapons":
             try:
-                return "{}的{}是:{}".format(
+                return "{}'s {} is:{}".format(
                     weapon_name, attribute, kg[weapon_name][attribute]
                 )
             except:
                 return kg
-        return kg #返回值需要是容易被模型理解的文字
+        return kg # The return value should be text that is easily understood by the model
 ```
-4. 根据具体需求，修改main.py文件最下方，执行以下函数的其中一个,执行前请保证第一步根据执行函数进行了配置：
+4. Depending on the specific requirements, modify the main.py file at the bottom, and execute one of the following functions. Make sure that the first step has been configured according to the executed function:
   ```python
   if __name__ == "__main__":
-      #get_question()# 获取简单Agent问题数据
+      #get_question() # Obtain simple Agent question data
       #get_complex_question()
-      #get_react_data # 获取agent执行过程数据
-      get_complex_react_data() # 获取复杂agent的执行过程数据
+      #get_react_data # Obtain Agent execution process data
+      get_complex_react_data() # Obtain complex Agent execution process data
   ```
-5. 执行get_react_data()或get_complex_react_data()后保存的训练数据已经保存为llamafactory的qwen训练格式，可以直接进行sft训练。
+5. After executing `get_react_data()` or `get_complex_react_data()`, the training data saved is in the Qwen training format by LLaMAFactory and can be directly used for SFT (Supervised Fine-Tuning) training.
