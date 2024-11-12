@@ -1,6 +1,6 @@
 
 # AutoPlan
-[English](./readme_en.md)
+[English](./readme.md)
 ## [AutoPlan1](https://github.com/LDLINGLINGLING/AutoPlan)
 
 ### 背景与挑战
