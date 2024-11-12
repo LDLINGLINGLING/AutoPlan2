@@ -1,7 +1,7 @@
 # AutoPlan
 
 ## [AutoPlan1](https://github.com/LDLINGLINGLING/AutoPlan)
-## [Chinese_readme]()
+## [Chinese_readme](./readme1.md)
 ### Background and Challenges
 - Before the launch of AutoPlan1, most intelligent agents (Agents) on the market had relatively basic functionalities with limited capability to handle complex problems.
 - These early Agents lacked the ability to process complex logic or perform long sequences of tasks, or even if they could attempt to solve them, the accuracy of their solutions was often unsatisfactory.
