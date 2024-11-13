@@ -1,5 +1,5 @@
 # AutoPlan
-## [Chinese_readme](./readme_1.md)
+## [中文](./readme_1.md)
 ## [AutoPlan1](https://github.com/LDLINGLINGLING/AutoPlan)
 ### Background and Challenges
 - Before the launch of AutoPlan1, most intelligent agents (Agents) on the market had relatively basic functionalities with limited capability to handle complex problems.
