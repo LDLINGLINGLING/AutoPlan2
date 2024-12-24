@@ -1,6 +1,8 @@
 
 # AutoPlan
 [English](./README.md)
+## Download Data
+[点击此处下载数据集，密码0048](https://pan.baidu.com/s/1VE98p-QiKqG9VOORUPtEDg)
 ## [AutoPlan1](https://github.com/LDLINGLINGLING/AutoPlan)
 
 ### 背景与挑战
