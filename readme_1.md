@@ -2,7 +2,6 @@
 ## Download Data
 [点击此处下载数据集，密码0048](https://pan.baidu.com/s/1VE98p-QiKqG9VOORUPtEDg)
 [English](./README.md)
-## AutoPlan
 ## [AutoPlan1](https://github.com/LDLINGLINGLING/AutoPlan)
 ### 背景与挑战
 - 在AutoPlan1推出之前，市场上的智能代理（Agents）大多功能较为基础，面对复杂的问题处理能力有限。
