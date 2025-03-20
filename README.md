@@ -30,7 +30,7 @@
   - **Enhanced Compatibility**: Ensures that Agents designed for simple tasks can be seamlessly integrated into more complex systems without additional adjustments.
 
 # Effect Demonstration:
-## [Zero Manual Construction of Long Chain Data](./data_demo)
+## [Zero Manual Construction of Long COT Data](./data_demo)
 ### The following data is randomly selected from 500 entries, without any manual modification or selection.
 ```plaintext
 Question1:
