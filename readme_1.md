@@ -1,6 +1,6 @@
 # AutoPlan2
 ## Download Data
-[点击此处下载数据集，密码0048](https://pan.baidu.com/s/1VE98p-QiKqG9VOORUPtEDg)
+[点击此处下载数据集，密码adan](https://pan.baidu.com/s/1VE98p-QiKqG9VOORUPtEDg)
 [English](./README.md)
 ## [AutoPlan1](https://github.com/LDLINGLINGLING/AutoPlan)
 ### 背景与挑战
